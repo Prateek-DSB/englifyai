@@ -6,7 +6,6 @@ import { useAuth } from '@/lib/auth-provider';
 import { supabase } from '@/lib/supabase';
 import Loading from '@/components/Loading';
 import { TestSubmission } from '@/types';
-const formatDate = (ts: any) => { if (!ts) return 'N/A'; return new Date(ts).toISOString().replace('T', ' ').substring(0, 19); };
 
 export default function ScoresPage() {
 
@@ -26,7 +25,7 @@ export default function ScoresPage() {
 
     const fetchSubmissions = async () => {
       try {
-        const username = user?.username || user?.Username || user;
+        const username = typeof user === 'string' ? user : user?.username || 'unknown';
         console.log('Fetch username:', username);
         const {data, error} = await supabase
           .from('test_submission')
@@ -41,7 +40,13 @@ export default function ScoresPage() {
           return;
         }
         
-        const sorted = (data || []).sort((a,b) => new Date(b.time_stamp || 0) - new Date(a.time_stamp || 0));
+        // FIX: Use getTime() for date arithmetic
+        const sorted = (data || []).sort((a, b) => {
+          const dateA = a.time_stamp ? new Date(a.time_stamp).getTime() : 0;
+          const dateB = b.time_stamp ? new Date(b.time_stamp).getTime() : 0;
+          return dateB - dateA;
+        });
+        
         setSubmissions(sorted);
         console.log('✅ Loaded', sorted.length, 'submissions');
       } catch (err) {
@@ -125,7 +130,7 @@ export default function ScoresPage() {
                         {category.charAt(0).toUpperCase() + category.slice(1)}
                       </span>
                       <span className="text-sm text-gray-500">
-                        {submission.time_stamp ? formatDate(submission.time_stamp) : 'N/A'}
+                        {date}
                       </span>
                     </div>
 

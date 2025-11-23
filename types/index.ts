@@ -21,12 +21,12 @@ export interface TestData {
 }
 
 export interface TestSubmission {
-  id?: number;
-  username: string;
-  test_category: string;
-  test_score: number;
-  wat: string;
-  time_stamp?: string;
+  id: number;
+  Username: string;
+  'Test score': number;
+  'Test Category': string;
+  time_stamp: string;
+  WAT: string;
 }
 
 export interface WATPrompt {
