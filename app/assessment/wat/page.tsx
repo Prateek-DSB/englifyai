@@ -104,7 +104,7 @@ function WATPageContent() {
     try {
       // Calculate MCQ score using TEST_DATA with detailed logging
       console.log('🔢 SCORE CALCULATION START');
-      const questions = TEST_DATA?.[level] || [];
+      const questions = TEST_DATA?.[level as 'easy' | 'medium' | 'hard'] || TEST_DATA.easy;
       let mcqScore = 0;
       for (let i = 0; i < answers.length; i++) {
         const answerLetter = String(answers[i]).toLowerCase();
