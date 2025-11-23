@@ -178,7 +178,7 @@ console.log('Calling DB now with validated params');
 
           {/* WAT Prompt */}
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-3">Prompt:</h2>
+            <h2 className="text-lg font-semibold text-gray-800 mb-3">Prompt: Describe your favorite season in 150-200 words. Why do you like it and what activities do you enjoy during that time?</h2>
             <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-indigo-500">
               <p className="text-gray-700">Write a comprehensive response to the given topic. Express your thoughts clearly and support your arguments with relevant examples.</p>
             </div>
