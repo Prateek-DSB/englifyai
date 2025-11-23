@@ -1,7 +1,7 @@
 import { TestSubmission } from '@/types';
 
 export interface SubmitTestParams {
-  username: string;
+  Username: string;
   testCategory: string;
   testScore: number;
   watText: string;
@@ -10,7 +10,7 @@ export interface SubmitTestParams {
 
 // Mock database using localStorage for development
 export async function submitTestToDatabase({
-  username,
+  Username,
   testCategory,
   testScore,
   watText,
@@ -18,7 +18,7 @@ export async function submitTestToDatabase({
 }: SubmitTestParams): Promise<{ success: boolean; error?: string }> {
   try {
     console.log('Submitting test to mock database:', {
-      username,
+      Username,
       testCategory,
       testScore,
       watTextLength: watText.length,
@@ -32,10 +32,10 @@ export async function submitTestToDatabase({
     // Create test submission object
     const submission: TestSubmission = {
       id: Date.now(), // Simple ID generation
-      username,
-      test_category: testCategory,
-      test_score: testScore,
-      wat: `${watText}\n\n--- EVALUATION ---\n${watEvaluation}`,
+      Username,
+      'Test Category': testCategory,
+      'Test score': testScore,
+      WAT: `${watText}\n\n--- EVALUATION ---\n${watEvaluation}`,
       time_stamp: new Date().toISOString()
     };
 
@@ -71,7 +71,7 @@ export async function getUserTestHistory(username: string) {
 
     // Filter by username and sort by timestamp (newest first)
     const userSubmissions = submissions
-      .filter(sub => sub.username === username)
+      .filter(sub => sub.Username === username)
       .sort((a, b) => new Date(b.time_stamp!).getTime() - new Date(a.time_stamp!).getTime());
 
     return { success: true, data: userSubmissions };
