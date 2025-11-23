@@ -26,7 +26,7 @@ export default function ScoresPage() {
 
     const fetchSubmissions = async () => {
       try {
-        const username = user?.username || user?.Username || user;
+        const username = typeof user === 'string' ? user : user?.username || 'unknown';
         console.log('Fetch username:', username);
         const {data, error} = await supabase
           .from('test_submission')
